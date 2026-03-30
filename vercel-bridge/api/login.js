@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   const TARGET_URL = 'https://modernfinance.ct.ws/api/customer/login.php';
   
   // The Bypass Cookie (Environment Variable recommended in Vercel)
-  const TEST_COOKIE = process.env.TEST_COOKIE || 'ecedf7a1b3f75ab4e99ea6c981046c64';
+  const TEST_COOKIE = process.env.TEST_COOKIE || '52fa0be024ef166e30eac273a076daa4';
 
   try {
     const response = await fetch(TARGET_URL, {
@@ -20,8 +20,16 @@ export default async function handler(req, res) {
       body: JSON.stringify(req.body)
     });
 
-    const data = await response.json();
-    return res.status(response.status).json(data);
+    const rawText = await response.text();
+    try {
+      const data = JSON.parse(rawText);
+      return res.status(response.status).json(data);
+    } catch (e) {
+      return res.status(500).json({ 
+        status: 'error', 
+        message: 'Raw Server Response (Non-JSON): ' + rawText.substring(0, 200) 
+      });
+    }
   } catch (error) {
     return res.status(500).json({ status: 'error', message: 'Vercel Bridge Error: ' + error.message });
   }

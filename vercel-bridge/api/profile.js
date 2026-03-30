@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   // Your InfinityFree Domain
   const TARGET_URL = 'https://modernfinance.ct.ws/api/customer/profile.php';
   
-  const TEST_COOKIE = process.env.TEST_COOKIE || 'ecedf7a1b3f75ab4e99ea6c981046c64';
+  const TEST_COOKIE = process.env.TEST_COOKIE || '52fa0be024ef166e30eac273a076daa4';
 
   try {
     const response = await fetch(TARGET_URL, {
