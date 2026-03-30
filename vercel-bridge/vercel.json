@@ -1,6 +1,8 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/api/login.php", "destination": "/api/login" },
+    { "source": "/api/profile.php", "destination": "/api/profile" },
     { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
